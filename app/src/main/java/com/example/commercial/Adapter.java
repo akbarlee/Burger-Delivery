@@ -1,6 +1,6 @@
 package com.example.commercial;
 
-import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,52 +10,43 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-
-    List<String> titles;
-    List<Integer> images;
+public class Adapter extends FirebaseRecyclerAdapter<Product , Adapter.ProductViewHolder> {
 
 
-    LayoutInflater inflater;
 
-    public Adapter (Context ctx , List<String> titles , List<Integer> images) {
-        this.titles = titles;
-        this.images = images;
-        this.inflater = LayoutInflater.from(ctx);
+    public Adapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+        super(options);
     }
 
+    @Override
+    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
+        holder.title.setText(model.getTitle());
+        Picasso.get().load(model.getImage()).into(holder.img);
+    }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_grid_layout , parent , false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(titles.get(position));
-        holder.gridIcon.setImageResource(images.get(position));
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_grid_layout , viewGroup , false);
+        return new ProductViewHolder(view);
 
     }
 
-    @Override
-    public int getItemCount() {
-        return titles.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // custom_grid_layout.xml de image ve title deyishiklik etmek uchun bunlari elave etdim
+    public  class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        ImageView gridIcon;
+        ImageView img;
+         public ProductViewHolder(@NonNull View itemView) {
+             super(itemView);
+             title = itemView.findViewById(R.id.burger_name);
+             img = itemView.findViewById(R.id.burger_img);
+         }
+}
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.burger_name);
-            gridIcon = itemView.findViewById(R.id.burger_img);
 
-        }
-    }
+
+   
 }

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "1055190963387",
-    "project_id": "commercial-507c3",
-    "storage_bucket": "commercial-507c3.appspot.com"
+    "project_number": "113019314073",
+    "project_id": "food-delivery-4bd",
+    "storage_bucket": "food-delivery-4bd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1055190963387:android:cb91025f79f69fa6be459e",
+        "mobilesdk_app_id": "1:113019314073:android:8b968ef1dc1febaf56bd08",
         "android_client_info": {
           "package_name": "com.example.commercial"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1055190963387-4l8cdaa7e051fn55jj3cse7m2iqla03j.apps.googleusercontent.com",
+          "client_id": "113019314073-jopt3ka095d4bn908kk7fr05na8hojsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.commercial",
+            "certificate_hash": "9b1ac71bbeca41796170df6e8c43ca50559ef1ab"
+          }
+        },
+        {
+          "client_id": "113019314073-v6in0ufg880jdlgkc6i9q3c2anidoaad.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_zfdMvt8Klm3yVXOn-XuFFmozyx4m4Gc"
+          "current_key": "AIzaSyAl4faLC7sihXCPtwHzaUxaGD6HttqMbHM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1055190963387-4l8cdaa7e051fn55jj3cse7m2iqla03j.apps.googleusercontent.com",
+              "client_id": "113019314073-v6in0ufg880jdlgkc6i9q3c2anidoaad.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
