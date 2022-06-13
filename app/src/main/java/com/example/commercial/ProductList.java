@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,9 +28,9 @@ public class ProductList extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.dataList);
-        database = FirebaseDatabase.getInstance().getReference().child("Products");
+        setContentView(R.layout.custom_grid_layout);
+        recyclerView = findViewById(R.id.cardBurger);
+        database = FirebaseDatabase.getInstance().getReference("Products").child("Burger");
         database.keepSynced(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -39,6 +40,8 @@ public class ProductList extends AppCompatActivity {
                 .setQuery(database, Product.class)
                 .build();
           adapter = new Adapter(options);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         database.addValueEventListener(new ValueEventListener() {
             @Override

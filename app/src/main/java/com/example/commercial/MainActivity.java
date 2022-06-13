@@ -23,11 +23,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
-  RecyclerView dataList;
-  Product product;
+    RecyclerView recyclerView;
+    DatabaseReference database;
+    Adapter adapter;
+    ArrayList<Product> list;
 
   private DatabaseReference dataBase;
 
@@ -39,8 +42,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*dataBase = FirebaseDatabase.getInstance().getReference().child("Products");
-        dataList = findViewById(R.id.dataList);*/
+
 
         b2back = findViewById(R.id.b2back);
         b2back.setFocusable(true);
