@@ -1,27 +1,27 @@
 package com.example.commercial;
 
 public class Product {
- String image , title ;
+ String Img , Title ;
 
     public Product(String image, String title) {
-        this.image = image;
-        this.title = title;
+        this.Img = image;
+        this.Title = title;
     }
 
     public String getImage() {
-        return image;
+        return Img;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.Img = image;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.Title = title;
     }
 
     public Product() {

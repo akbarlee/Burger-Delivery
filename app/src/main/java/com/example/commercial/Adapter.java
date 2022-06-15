@@ -14,8 +14,9 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-public class Adapter extends FirebaseRecyclerAdapter<Product , Adapter.ProductViewHolder> {
+import org.w3c.dom.Text;
 
+public class Adapter extends FirebaseRecyclerAdapter<Product , Adapter.viewHolder>{
 
 
     public Adapter(@NonNull FirebaseRecyclerOptions<Product> options) {
@@ -23,30 +24,28 @@ public class Adapter extends FirebaseRecyclerAdapter<Product , Adapter.ProductVi
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
-        holder.title.setText(model.getTitle());
-        Picasso.get().load(model.getImage()).into(holder.img);
+    protected void onBindViewHolder(@NonNull viewHolder holder, int position, @NonNull Product model) {
+        holder.textView.setText(model.getTitle());
+        Picasso.get().load(model.getImage()).into(holder.imageView);
     }
 
-    @NonNull
+
+
+@NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_grid_layout , viewGroup , false);
-        return new ProductViewHolder(view);
-
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main , parent , false);
+       return  new viewHolder(view);
     }
 
-    public  class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        ImageView img;
-         public ProductViewHolder(@NonNull View itemView) {
-             super(itemView);
-             title = itemView.findViewById(R.id.burger_name);
-             img = itemView.findViewById(R.id.burger_img);
-         }
-}
+    class viewHolder extends  RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView textView;
 
-
-
-   
+        public viewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = (ImageView) itemView.findViewById(R.id.burger_img);
+            textView = (TextView) itemView.findViewById(R.id.burger_name);
+        }
+    }
 }
