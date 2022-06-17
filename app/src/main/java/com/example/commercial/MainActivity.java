@@ -1,10 +1,14 @@
 package com.example.commercial;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity  {
     RecyclerView recyclerView;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mRef;
-
+   List<Product> productList;
 
             Adapter adapter;
     ArrayList<Product> list;
@@ -56,7 +61,12 @@ public class MainActivity extends AppCompatActivity  {
                 .build();
 
          adapter = new Adapter(options);
-         recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+
+
 
         b2back = findViewById(R.id.b2back);
         b2back.setFocusable(true);
@@ -70,9 +80,6 @@ public class MainActivity extends AppCompatActivity  {
         b1back.requestFocus();
 
 
-        // send Query to Firebase Database
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mRef = mFirebaseDatabase.getReference().child("Products").child("Burger");
 
 
     }
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-    }
+}
 
 
 

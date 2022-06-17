@@ -26,7 +26,8 @@ public class Adapter extends FirebaseRecyclerAdapter<Product , Adapter.viewHolde
     @Override
     protected void onBindViewHolder(@NonNull viewHolder holder, int position, @NonNull Product model) {
         holder.textView.setText(model.getTitle());
-        Picasso.get().load(model.getImage()).into(holder.imageView);
+
+       Picasso.get().load(model.getImage()).into(holder.imageView);
     }
 
 

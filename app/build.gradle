@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,5 +42,6 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.google.firebase:firebase-database:20.0.4'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "113019314073",
+    "firebase_url": "https://food-delivery-4bd-default-rtdb.firebaseio.com",
     "project_id": "food-delivery-4bd",
     "storage_bucket": "food-delivery-4bd.appspot.com"
   },
