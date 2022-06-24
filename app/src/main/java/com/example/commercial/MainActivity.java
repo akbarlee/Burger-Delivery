@@ -1,17 +1,17 @@
 package com.example.commercial;
 
-import static android.content.ContentValues.TAG;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import androidx.cardview.widget.CardView;
@@ -22,48 +22,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity  {
-    RecyclerView recyclerView;
+    LinearLayoutManager mLinearLayoutManager;
+    RecyclerView mRecyclerView;
     FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference mRef;
-   List<Product> productList;
+    DatabaseReference mDatabaseReference;
+    FirebaseRecyclerOptions<Product> options;
+    FirebaseRecyclerAdapter<Product , ViewHolder> firebaseRecyclerAdapter;
 
-            Adapter adapter;
-    ArrayList<Product> list;
 
 
 
   CardView b1back , b2back , b3back , b4back;
-    private boolean mStarted = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.dataList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setStackFromEnd(true);
+
+              mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mRecyclerView = findViewById(R.id.dataList);
+        mDatabaseReference = mFirebaseDatabase.getReference("Products");
+        showData();
 
 
-        FirebaseRecyclerOptions<Product> options = new FirebaseRecyclerOptions.Builder<Product>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("Products").child("Burger"), Product.class)
-                .build();
 
-         adapter = new Adapter(options);
-        recyclerView.setAdapter(adapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(gridLayoutManager);
+
+     /* GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setAdapter(adapter);*/
 
 
 
@@ -83,18 +84,45 @@ public class MainActivity extends AppCompatActivity  {
 
 
     }
-    @Override
-    public void onStart() {
+    private void showData() {
+        options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(mDatabaseReference , Product.class).build();
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Product, ViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Product model) {
+                holder.setDetails(getApplicationContext(), model.getImage() , model.getTitle());
+            }
+
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_grid_layout , parent , false);
+                  ViewHolder viewHolder = new ViewHolder(itemView);
+                  viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                      @Override
+                      public void onItemClick(View view, int position) {
+                          Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                      }
+
+                      @Override
+                      public void onItemLongClick(View view, int position) {
+                          Toast.makeText(MainActivity.this, "Long Click", Toast.LENGTH_SHORT).show();
+                      }
+                  });
+                return  viewHolder;
+            }
+        };
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        firebaseRecyclerAdapter.startListening();
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+
+  protected  void onStart() {
         super.onStart();
-        adapter.startListening();
-    }
-    @Override
-    public void  onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
-
+        if(firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+        }
+  }
 
 
 
