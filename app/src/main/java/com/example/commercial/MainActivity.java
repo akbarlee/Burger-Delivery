@@ -59,16 +59,6 @@ public class MainActivity extends AppCompatActivity  {
         mDatabaseReference = mFirebaseDatabase.getReference("Products");
         showData();
 
-
-
-
-     /* GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRecyclerView.setAdapter(adapter);*/
-
-
-
-
         b2back = findViewById(R.id.b2back);
         b2back.setFocusable(true);
         b2back.setFocusableInTouchMode(true);
@@ -89,7 +79,7 @@ public class MainActivity extends AppCompatActivity  {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Product, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Product model) {
-                holder.setDetails(getApplicationContext(), model.getImage() , model.getTitle());
+                holder.setDetails(getApplicationContext(), model.getTitle() , model.getImage());
             }
 
             @NonNull
@@ -111,7 +101,8 @@ public class MainActivity extends AppCompatActivity  {
                 return  viewHolder;
             }
         };
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
         firebaseRecyclerAdapter.startListening();
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
