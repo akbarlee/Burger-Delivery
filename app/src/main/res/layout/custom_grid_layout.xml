@@ -7,6 +7,7 @@
        <androidx.cardview.widget.CardView
             android:id="@+id/cardBurger"
            android:layout_marginLeft="14dp"
+           android:layout_marginRight="14dp"
            android:layout_marginTop="35dp"
            android:layout_width="185dp"
            android:layout_height="249dp">
