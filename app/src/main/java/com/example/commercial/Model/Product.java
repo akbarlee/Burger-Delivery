@@ -1,11 +1,19 @@
-package com.example.commercial;
+package com.example.commercial.Model;
 
 public class Product {
- String image , title ;
+  private String image , title , product_id;
 
     public Product(String image, String title) {
         this.image = image;
         this.title = title;
+    }
+
+
+
+    public Product(String image, String title, String product_id) {
+        this.image = image;
+        this.title = title;
+        this.product_id = product_id;
     }
 
     public String getImage() {
@@ -26,5 +34,12 @@ public class Product {
 
     public Product() {
 
+    }
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 }

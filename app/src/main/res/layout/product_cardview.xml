@@ -29,6 +29,7 @@
 
                    </TextView>
                    <ImageView
+                       android:id="@+id/like"
                        android:layout_width="16dp"
                        android:layout_height="14dp"
                        android:src="@drawable/heart_plain"
@@ -57,9 +58,10 @@
                <TextView
                    android:id="@+id/burger_name"
                    android:textStyle="bold"
+                   android:textSize="10sp"
                    android:layout_marginLeft="12dp"
                    android:layout_marginTop="12dp"
-                   android:layout_width="88dp"
+                   android:layout_width="130dp"
                    android:layout_height="17dp"
                    android:text="Beff Burger">
 

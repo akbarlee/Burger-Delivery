@@ -1,4 +1,4 @@
-package com.example.commercial;
+package com.example.commercial.Fragment;
 
 import android.os.Bundle;
 
@@ -8,17 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ThirdFragment extends Fragment {
+import com.example.commercial.R;
 
+
+public class FourthFragment extends Fragment {
     View view;
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.fragment_third, container, false);
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_fourth, container, false);
         return view;
     }
 }

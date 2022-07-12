@@ -1,6 +1,5 @@
-package com.example.commercial;
+package com.example.commercial.Adapter;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.commercial.R;
 import com.squareup.picasso.Picasso;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -15,7 +15,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
-        mview = itemView;
+               mview = itemView;
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,7 +31,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
              }
          });
     }
-     public void setDetails(Context ctx , String title , String image) {
+     public void setDetails(ViewHolder ctx , String title , String image) {
          TextView mTitle = mview.findViewById(R.id.burger_name);
          ImageView mImage = mview.findViewById(R.id.burger_img);
 
