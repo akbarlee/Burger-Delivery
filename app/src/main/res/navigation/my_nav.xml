@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/home">
+    >
 
     <fragment
-        android:id="@+id/firstFragment"
+        android:id="@+id/home"
         android:name="com.example.commercial.Fragment.HomeFragment"
-        android:label="fragment_first"
+        android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/secondFragment"

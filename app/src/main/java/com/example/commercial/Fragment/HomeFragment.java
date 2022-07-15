@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Product model) {
-                holder.setDetails(holder, model.getTitle() , model.getImage());
+                holder.setDetails(model.getTitle() , model.getImage());
             }
 
             @NonNull

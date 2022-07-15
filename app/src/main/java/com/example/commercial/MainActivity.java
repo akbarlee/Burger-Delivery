@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import androidx.cardview.widget.CardView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,11 +45,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity  {
 
     LinearLayoutManager mLinearLayoutManager;
-    RecyclerView mRecyclerView;
-    FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference mDatabaseReference;
-    FirebaseRecyclerOptions<Product> options;
-    FirebaseRecyclerAdapter<Product , ViewHolder> firebaseRecyclerAdapter;
     BottomNavigationView bottomNavigationView;
 
 
@@ -57,20 +54,12 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+       fragmentEngineer(new HomeFragment());
 
-  mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setReverseLayout(true);
-        mLinearLayoutManager.setStackFromEnd(true);
-/*
-              mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mRecyclerView = findViewById(R.id.dataList);
-        mDatabaseReference = mFirebaseDatabase.getReference("Products");*/
-
-
-      /*  b2back = findViewById(R.id.b2back);
+ /*  b2back = findViewById(R.id.b2back);
         b2back.setFocusable(true);
         b2back.setFocusableInTouchMode(true);
         b2back.requestFocus();
@@ -81,32 +70,37 @@ public class MainActivity extends AppCompatActivity  {
         b1back.setFocusableInTouchMode(true);
         b1back.requestFocus();*/
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-       getSupportFragmentManager().beginTransaction().replace(R.id.main_container , new HomeFragment()).commit();
-      bottomNavigationView.setSelectedItemId(R.id.home);
-      bottomNavigationView.setOnItemSelectedListener(item -> {
-          Fragment fragment = null;
-         switch (item.getItemId()) {
-             case R.id.home:
-                 fragment = new HomeFragment();
-                 break;
-             case R.id.favorite:
-                 fragment = new SecondFragment();
-                 break;
-             case R.id.cart:
-                 fragment = new ThirdFragment();
-                 break;
-             case R.id.profile:
-                 fragment = new FourthFragment();
-                 break;
-         }
-          getSupportFragmentManager().beginTransaction().replace(R.id.main_container ,fragment).commit();
+
+  bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+          switch (item.getItemId()) {
+              case R.id.home:
+                  fragmentEngineer(new HomeFragment());
+                  break;
+              case R.id.favorite:
+                  fragmentEngineer(new SecondFragment());
+                  break;
+              case R.id.cart:
+                  fragmentEngineer(new ThirdFragment());
+                  break;
+              case R.id.profile:
+                  fragmentEngineer(new FourthFragment());
+                  break;
+          }
           return true;
-      });
+      }
+  });
+
 
     }
 
-
+        private  void fragmentEngineer(Fragment fragment) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.main_container,fragment);
+            fragmentTransaction.commit();
+        }
 
 
 
