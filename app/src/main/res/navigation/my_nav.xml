@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.commercial.Fragment.SecondFragment"
+        android:name="com.example.commercial.Fragment.FavouriteFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_Favourite" />
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.example.commercial.Fragment.ThirdFragment"
+        android:name="com.example.commercial.Fragment.CartFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" />
+        tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/fourthFragment"
-        android:name="com.example.commercial.Fragment.FourthFragment"
+        android:name="com.example.commercial.Fragment.ProfileFragment"
         android:label="fragment_fourth"
-        tools:layout="@layout/fragment_fourth" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

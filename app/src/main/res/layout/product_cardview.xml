@@ -17,7 +17,7 @@
                android:layout_height="wrap_content">
                <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
+                   android:layout_height="match_parent"
                    android:orientation="horizontal">
                    <TextView
                        android:text=" 15% OFF"
@@ -45,11 +45,11 @@
 
                <ImageView
                    android:id="@+id/burger_img"
-                   android:layout_marginTop="54dp"
+                   android:layout_marginTop="15dp"
                    android:layout_marginLeft="14dp"
                    android:layout_marginRight="14dp"
-                   android:layout_width="157dp"
-                   android:layout_height="92dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="154dp"
 
 
                  >
