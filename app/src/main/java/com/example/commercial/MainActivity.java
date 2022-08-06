@@ -1,55 +1,25 @@
 package com.example.commercial;
 
-
-
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-
-
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-
 import androidx.cardview.widget.CardView;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.commercial.Adapter.ViewHolder;
 import com.example.commercial.Fragment.HomeFragment;
-import com.example.commercial.Fragment.FourthFragment;
-import com.example.commercial.Fragment.SecondFragment;
-import com.example.commercial.Fragment.ThirdFragment;
-import com.example.commercial.Model.Product;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-
+import com.example.commercial.Fragment.ProfileFragment;
+import com.example.commercial.Fragment.FavouriteFragment;
+import com.example.commercial.Fragment.CartFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
 
 public class MainActivity extends AppCompatActivity  {
 
-    LinearLayoutManager mLinearLayoutManager;
     BottomNavigationView bottomNavigationView;
 
-
-
-  CardView b1back , b2back , b3back , b4back;
+   CardView b1back , b2back , b3back , b4back;
 
 
     @Override
@@ -79,21 +49,19 @@ public class MainActivity extends AppCompatActivity  {
                   fragmentEngineer(new HomeFragment());
                   break;
               case R.id.favorite:
-                  fragmentEngineer(new SecondFragment());
+                  fragmentEngineer(new FavouriteFragment());
                   break;
               case R.id.cart:
-                  fragmentEngineer(new ThirdFragment());
+                  fragmentEngineer(new CartFragment());
                   break;
               case R.id.profile:
-                  fragmentEngineer(new FourthFragment());
+                  fragmentEngineer(new ProfileFragment());
                   break;
           }
           return true;
       }
   });
-
-
-    }
+  }
 
         private  void fragmentEngineer(Fragment fragment) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -101,10 +69,6 @@ public class MainActivity extends AppCompatActivity  {
             fragmentTransaction.replace(R.id.main_container,fragment);
             fragmentTransaction.commit();
         }
-
-
-
-
 
 
 
