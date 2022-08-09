@@ -3,9 +3,10 @@ package com.example.commercial.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class LoginFragment extends Fragment {
     Button getSignin  ;
     TextInputEditText enterMail , enterPass;
     TextView getSignup, forgotPassword , subtext , txt1 , regRePass;
-
+       CallbackFragment callbackFragment;
 
 
     @Override
@@ -52,7 +53,14 @@ public class LoginFragment extends Fragment {
         regRePass = view.findViewById(R.id.regRePass);
         getSignin = view.findViewById(R.id.getSignin);
         getSignup = view.findViewById(R.id.getSignup);
-
+        getSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (callbackFragment != null) {
+                    callbackFragment.changeFragment();
+                }
+            }
+        });
         getSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +105,9 @@ public class LoginFragment extends Fragment {
 
         });
         return view;
+    }
+    public void setCallbackFragment(CallbackFragment callbackFragment) {
+        this.callbackFragment = callbackFragment;
     }
 }
 

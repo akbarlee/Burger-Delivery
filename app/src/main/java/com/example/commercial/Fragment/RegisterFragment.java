@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,11 +75,11 @@ public class RegisterFragment extends Fragment {
         String str_repass = regRePass.getText().toString();
 
         if (TextUtils.isEmpty(str_name) || TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_mail) || TextUtils.isEmpty(str_pass) || TextUtils.isEmpty(str_repass)) {
-            Toast.makeText(getContext(), "Bütün sətirləri doldurun", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Bütün sətirləri doldurun", Toast.LENGTH_SHORT).show();
         } else if (str_pass.length() < 6) {
-            Toast.makeText(getContext(), "Şifrə 6 simvoldan böyük olmalıdır.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Şifrə 6 simvoldan böyük olmalıdır.", Toast.LENGTH_SHORT).show();
         } else if (!str_pass.equals(str_repass)) {
-            Toast.makeText(getContext(), "Şifrə eyni olmalıdır.", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "Şifrə eyni olmalıdır.", Toast.LENGTH_SHORT);
         } else {
             // yeni user qeyd etme kodlari burda çağrılacaq
             save(str_username, str_name, str_mail, str_pass);
@@ -89,7 +89,7 @@ public class RegisterFragment extends Fragment {
     private void save (String username , String name , String mail , String pass) {
         // yeni user qeyd etme kodlari burda yazilacaq
         mAuth.createUserWithEmailAndPassword(mail , pass)
-                .addOnCompleteListener(getContext(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
@@ -105,19 +105,20 @@ public class RegisterFragment extends Fragment {
                             hashMap.put("mail" , mail);
                             hashMap.put("pass" , pass);
                             hashMap.put("bio" , "");
-                            hashMap.put("photourl" , "https://firebasestorage.googleapis.com/v0/b/android-c01c1.appspot.com/o/placeholder.jpg?alt=media&token=5131ce0a-75ec-4644-8928-d6b2aff04509");
+                            hashMap.put("photourl" ,
+                   "https://firebasestorage.googleapis.com/v0/b/android-c01c1.appspot.com/o/placeholder.jpg?alt=media&token=5131ce0a-75ec-4644-8928-d6b2aff04509");
 
                             yol.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                            @Override
-                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                if (task.isSuccessful()) {
-                                                                                    pd.dismiss();
-                                                                                    Intent intent = new Intent(RegisterFragment.class , LoginFragment.class);
-                                                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                                    startActivity(intent);
-                                                                                }
-                                                                            }
-                                                                        }
+                  @Override
+                   public void onComplete(@NonNull Task<Void> task) {
+                      if (task.isSuccessful()) {
+                    pd.dismiss();
+                   /*  Intent intent = new Intent(RegisterFragment.class , LoginFragment.class);
+                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                       startActivity(intent);*/
+                          }
+                                 }
+                               }
                             );
                         }
                         else {
