@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import android.text.TextUtils;
@@ -35,7 +37,8 @@ public class LoginFragment extends Fragment {
     TextInputEditText enterMail , enterPass;
     TextView getSignup, forgotPassword , subtext , txt1 , regRePass;
        CallbackFragment callbackFragment;
-
+ FragmentManager fragmentManager;
+ FragmentTransaction fragmentTransaction;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login , container , false);
+
         enterMail =  view.findViewById(R.id.regMail);
         enterPass = view.findViewById(R.id.enterPass);
         regRePass = view.findViewById(R.id.regRePass);
@@ -71,6 +75,7 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getContext(), "Bütün xanaları doldurun", Toast.LENGTH_LONG).show();
                 } else {
                     // Girish etmek uchun
+                    mAuth = FirebaseAuth.getInstance();
                     mAuth.signInWithEmailAndPassword(inputMail, inputPass)
                             .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -78,12 +83,13 @@ public class LoginFragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         DatabaseReference yol = FirebaseDatabase.getInstance().getReference().child("İstifadeciler").child(mAuth.getCurrentUser().getUid());
                                         yol.addValueEventListener(new ValueEventListener() {
+
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                                showMainFragment();
+                                                /*Intent intent = new Intent(getActivity(), MainActivity.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
+                                                startActivity(intent);*/
 
                                             }
 
@@ -108,6 +114,14 @@ public class LoginFragment extends Fragment {
     }
     public void setCallbackFragment(CallbackFragment callbackFragment) {
         this.callbackFragment = callbackFragment;
+    }
+    public void showMainFragment() {
+        Fragment fragment = new HomeFragment();
+        fragmentManager = getActivity().getSupportFragmentManager();
+
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_container,fragment);
+        fragmentTransaction.commit();
     }
 }
 
