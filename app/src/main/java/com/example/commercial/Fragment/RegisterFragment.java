@@ -31,7 +31,7 @@ import java.util.HashMap;
 public class RegisterFragment extends Fragment {
     EditText regName, regMail, regPass, regRePass;
     TextInputEditText regUsername;
-    TextView txt_account;
+    CallbackFragment callbackFragment;
     Button bRegister;
     ProgressDialog pd;
     private FirebaseAuth mAuth;
@@ -49,6 +49,7 @@ public class RegisterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         mAuth = FirebaseAuth.getInstance();
         regUsername = view.findViewById(R.id.regName);
+        regName = view.findViewById(R.id.regName);
         regMail = view.findViewById(R.id.regMail);
         regPass = view.findViewById(R.id.regPass);
         regRePass = view.findViewById(R.id.regPass);
@@ -97,7 +98,7 @@ public class RegisterFragment extends Fragment {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String userID = firebaseUser.getUid();
                             yol = FirebaseDatabase.getInstance().getReference().child("İstifadeciler").child(userID);
-                            // Birden cox data gondermek uchun HashMap istifade etmeliyik
+                            // Birden cox data gondermek uchun HashMap istifade edirem
                             HashMap<String , Object> hashMap = new HashMap<>();
                             hashMap.put("id" , userID);
                             hashMap.put("username" , username.toLowerCase());
@@ -116,6 +117,7 @@ public class RegisterFragment extends Fragment {
                    /*  Intent intent = new Intent(RegisterFragment.class , LoginFragment.class);
                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                        startActivity(intent);*/
+
                           }
                                  }
                                }
