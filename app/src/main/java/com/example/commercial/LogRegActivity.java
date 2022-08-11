@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.commercial.Fragment.CallbackFragment;
+import com.example.commercial.Fragment.HomeFragment;
 import com.example.commercial.Fragment.LoginFragment;
 import com.example.commercial.Fragment.RegisterFragment;
 
@@ -30,6 +31,7 @@ public class LogRegActivity extends AppCompatActivity implements CallbackFragmen
         fragmentTransaction.commit();
 
   }
+
     public void replaceFragment() {
         fragment = new RegisterFragment();
         fragmentManager = getSupportFragmentManager();
@@ -42,4 +44,6 @@ public class LogRegActivity extends AppCompatActivity implements CallbackFragmen
     public void changeFragment() {
           replaceFragment();
     }
+
+
 }
