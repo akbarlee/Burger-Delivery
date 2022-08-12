@@ -40,6 +40,7 @@ public class LoginFragment extends Fragment {
  FragmentManager fragmentManager;
  FragmentTransaction fragmentTransaction;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class LoginFragment extends Fragment {
         getSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (callbackFragment != null) {
                     callbackFragment.changeFragment();
                 }
@@ -86,10 +88,11 @@ public class LoginFragment extends Fragment {
 
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                               Intent intent = new Intent(getActivity(), MainActivity.class);
+                                              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
                                                 showMainFragment();
-                                                /*Intent intent = new Intent(getActivity(), MainActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);*/
 
                                             }
 
@@ -116,13 +119,17 @@ public class LoginFragment extends Fragment {
         this.callbackFragment = callbackFragment;
     }
     public void showMainFragment() {
-        Fragment fragment = new HomeFragment();
+
+
+      Fragment fragment = new Fragment();
+
         fragmentManager = getActivity().getSupportFragmentManager();
 
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.main_container,fragment);
+        fragmentTransaction.replace(R.id.main_container,fragment);
         fragmentTransaction.commit();
     }
+
 }
 
 
