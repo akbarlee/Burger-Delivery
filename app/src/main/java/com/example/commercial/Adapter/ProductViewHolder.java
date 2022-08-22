@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.commercial.R;
 import com.squareup.picasso.Picasso;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ProductViewHolder extends RecyclerView.ViewHolder {
     View mview;
 
-    public ViewHolder(@NonNull View itemView) {
+    public ProductViewHolder(@NonNull View itemView) {
         super(itemView);
                mview = itemView;
 
@@ -39,14 +39,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
          Picasso.get().load(image).into(mImage);
      }
-      private ViewHolder.ClickListener mClickListener;
+      private ProductViewHolder.ClickListener mClickListener;
 
     public interface ClickListener {
         void  onItemClick (View view , int position);
         void  onItemLongClick (View view , int position);
 
     }
-     public void setOnClickListener (ViewHolder.ClickListener clickListener) {
+     public void setOnClickListener (ProductViewHolder.ClickListener clickListener) {
         mClickListener = clickListener;
      }
 }
