@@ -7,6 +7,8 @@
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/burger_icon_selector.xml" value="0.224" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/burgers_scroll.xml" value="0.224" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/cart.xml" value="0.1855" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/category_item.xml" value="0.1735" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/category_selector.xml" value="0.1735" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/custom_grid_layout.xml" value="0.224" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/edit_text_background.xml" value="0.17" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/heart_plain.xml" value="0.1925" />
@@ -14,6 +16,7 @@
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_burgers.xml" value="0.224" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_cart.xml" value="0.1785" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_character.xml" value="0.17" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_hamburger_plain.xml" value="0.1735" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_launcher_background.xml" value="0.224" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_main.xml" value="0.1785" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/drawable/ic_profile.xml" value="0.216" />
@@ -23,11 +26,13 @@
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/activity_log_reg.xml" value="0.2" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/category_item.xml" value="0.25" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/custom_grid_layout.xml" value="0.536" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_Favourite.xml" value="0.2" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_burger.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_first.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_fourth.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_home.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/Enigma/AndroidStudioProjects/commercial/app/src/main/res/layout/fragment_second.xml" value="0.22447916666666667" />
