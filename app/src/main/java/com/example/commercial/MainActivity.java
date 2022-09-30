@@ -8,10 +8,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.commercial.Fragment.HomeFragment;
-import com.example.commercial.Fragment.ProfileFragment;
-import com.example.commercial.Fragment.FavouriteFragment;
-import com.example.commercial.Fragment.CartFragment;
+import com.example.commercial.MainFragment.HomeFragment;
+import com.example.commercial.MainFragment.ProfileFragment;
+import com.example.commercial.MainFragment.FavouriteFragment;
+import com.example.commercial.MainFragment.CartFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

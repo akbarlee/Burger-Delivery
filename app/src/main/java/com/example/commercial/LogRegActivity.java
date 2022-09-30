@@ -7,10 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.example.commercial.Fragment.CallbackFragment;
-import com.example.commercial.Fragment.HomeFragment;
-import com.example.commercial.Fragment.LoginFragment;
-import com.example.commercial.Fragment.RegisterFragment;
+import com.example.commercial.MainFragment.CallbackFragment;
+import com.example.commercial.MainFragment.LoginFragment;
+import com.example.commercial.MainFragment.RegisterFragment;
 
 public class LogRegActivity extends AppCompatActivity implements CallbackFragment {
  Fragment fragment;
