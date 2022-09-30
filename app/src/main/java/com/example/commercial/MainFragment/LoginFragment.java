@@ -1,4 +1,4 @@
-package com.example.commercial.Fragment;
+package com.example.commercial.MainFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.commercial.LogRegActivity;
 import com.example.commercial.MainActivity;
 import com.example.commercial.R;
 import com.google.android.gms.tasks.OnCompleteListener;
