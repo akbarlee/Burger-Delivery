@@ -7,11 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.commercial.MainFragment.HomeFragment;
 import com.example.commercial.R;
 import com.squareup.picasso.Picasso;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
     View mview;
+
 
     public ProductViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -31,7 +33,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
              }
          });
     }
-     public void setDetails( String title , String image) {
+     public void setProductDetails( String title , String image) {
          TextView mTitle = mview.findViewById(R.id.burger_name);
          ImageView mImage = mview.findViewById(R.id.burger_img);
 
@@ -49,4 +51,5 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
      public void setOnClickListener (ProductViewHolder.ClickListener clickListener) {
         mClickListener = clickListener;
      }
+
 }
