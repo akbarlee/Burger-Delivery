@@ -3,8 +3,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-
 import com.example.commercial.Adapter.CategoryViewAdapter;
 import com.example.commercial.Adapter.ProductViewHolder;
 import com.example.commercial.Model.Category;
@@ -21,8 +17,11 @@ import com.example.commercial.Model.Product;
 import com.example.commercial.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 
 import java.util.ArrayList;
 
@@ -32,11 +31,10 @@ public class HomeFragment extends Fragment {
     FirebaseRecyclerOptions<Product> options;
     FirebaseRecyclerAdapter<Product , ProductViewHolder> firebaseRecyclerAdapter;
     RecyclerView mRecyclerView;
-    private View mView;
-    Category category;
+    Query allProducts;
     ArrayList<Category> item;
     CategoryViewAdapter categoryViewAdapter;
-    DatabaseReference burgerReference , databaseReference ;
+    DatabaseReference  databaseReference ;
    private RecyclerView category_recycler; // For category
 
     @Override
@@ -47,7 +45,7 @@ public class HomeFragment extends Fragment {
         mLinearLayoutManager.setStackFromEnd(true);
         databaseReference = database.getReference("Products");
 
-        showData();
+
 
     }
 
@@ -78,7 +76,10 @@ public class HomeFragment extends Fragment {
         // ---------------------------------------------------------------------------------------
 
 
-        burgerReference = FirebaseDatabase.getInstance().getReference("Products").child("Burger");
+        allProducts =databaseReference
+                .orderByChild("category")
+                .equalTo("Sauce" );
+           databaseReference = FirebaseDatabase.getInstance().getReference("Products");
 
           return view;
 
@@ -89,6 +90,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        showData();
         if (firebaseRecyclerAdapter != null) {
             firebaseRecyclerAdapter.startListening();
             mRecyclerView.setAdapter(firebaseRecyclerAdapter);
@@ -103,11 +105,23 @@ public class HomeFragment extends Fragment {
                 return position;
         return 0;
     }
+
     public void showData() {
         //  options ilə setQuery və Product qeyd edərək konfiqurasiya edirik
-        options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(databaseReference , Product.class).build();
+        options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(allProducts , Product.class).build();
         // Product ile ProductHolderi binding etmek uchun firebaseRecyclerAdapter istifade edirik
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
+           /* @Override
+            public void updateOptions(@NonNull FirebaseRecyclerOptions<Product> options) {
+                super.updateOptions(options);
+            }
+
+            @Override
+            public void onDataChanged() {
+                super.onDataChanged();
+                // Called each time there is a new query snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+            }*/
 
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
