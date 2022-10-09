@@ -1,4 +1,7 @@
 package com.example.commercial.MainFragment;
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,9 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+
 import com.example.commercial.Adapter.CategoryViewAdapter;
 import com.example.commercial.Adapter.ProductViewHolder;
 import com.example.commercial.Model.Category;
@@ -25,17 +31,19 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CategoryViewAdapter.ItemClickListener {
     LinearLayoutManager mLinearLayoutManager;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    FirebaseRecyclerOptions<Product> options;
-    FirebaseRecyclerAdapter<Product , ProductViewHolder> firebaseRecyclerAdapter;
-    RecyclerView mRecyclerView;
-    Query allProducts;
-    ArrayList<Category> item;
+     FirebaseRecyclerAdapter<Product , ProductViewHolder> burger_product , drink_product;
+    FirebaseRecyclerOptions<Product> burger_category_options;
+    RecyclerView burger_recyclerView , drink_recyclerView;
     CategoryViewAdapter categoryViewAdapter;
+    Context myContext;
+    Query  categoryQuery , drinkQuery ;
+    ArrayList<Category> category_burger_arraylist , category_drink_arraylist;
+    CategoryViewAdapter burger_category_adapter , drink_category_adapter;
     DatabaseReference  databaseReference ;
-   private RecyclerView category_recycler; // For category
+   private RecyclerView category_recyclerView; // For category
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,32 +62,33 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
           View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         // Category listini göstərməkçün
-        item = new ArrayList<>();
-        item.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 0));
-        item.add(new Category(R.drawable.ic_hamburger_plain , "Burger" , 1));
-        item.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 2));
-        item.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 3 ));
-        category_recycler = view.findViewById(R.id.category_list);
-        categoryViewAdapter = new CategoryViewAdapter(item);
-        category_recycler.setLayoutManager(new GridLayoutManager(getActivity(),1 ,GridLayoutManager.HORIZONTAL,false));
-        category_recycler.setAdapter(categoryViewAdapter);
+        category_burger_arraylist = new ArrayList<>();
+
+
+        category_burger_arraylist.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 0));
+        category_burger_arraylist.add(new Category(R.drawable.ic_hamburger_plain , "Burger" , 1));
+        category_burger_arraylist.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 2));
+        category_burger_arraylist.add(new Category(R.drawable.ic_hamburger_plain , "Burger", 3 ));
+        category_recyclerView = view.findViewById(R.id.category_list);
+        burger_category_adapter = new CategoryViewAdapter(category_burger_arraylist);
+        category_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1 ,GridLayoutManager.HORIZONTAL,false));
+        category_recyclerView.setAdapter(burger_category_adapter);
         // --------------------------------------------------------------------
 
           //  Burger listini göstermekçün
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setReverseLayout(true);
         mLinearLayoutManager.setStackFromEnd(true);
-        mRecyclerView = view.findViewById(R.id.burger_data_list);
+        burger_recyclerView = view.findViewById(R.id.burger_data_list);
+
         // mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL , false));
+        burger_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL , false));
+
         // ---------------------------------------------------------------------------------------
 
-
-        allProducts =databaseReference
-                .orderByChild("category")
-                .equalTo("Sauce" );
-           databaseReference = FirebaseDatabase.getInstance().getReference("Products");
+       databaseReference = FirebaseDatabase.getInstance().getReference("Products");
 
           return view;
 
@@ -90,38 +99,98 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        showData();
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.startListening();
-            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-        }
+        showData(1);
+
+
+        burger_product.startListening();
+        burger_recyclerView.setAdapter(burger_product);
+         //   drink_category.startListening();
+
+        //   drink_recyclerView.setAdapter(drink_category);
+
+
     }
 
-
-    private int getAdapterItemPosition(long id)
-    {
-        for (int position=0; position<item.size(); position++)
-            if (item.get(position).getCategory_id() == id)
-                return position;
-        return 0;
+    @Override
+    public void onStop() {
+        super.onStop();
+        burger_product.stopListening();
+       // drink_category.stopListening();
     }
 
-    public void showData() {
-        //  options ilə setQuery və Product qeyd edərək konfiqurasiya edirik
-        options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(allProducts , Product.class).build();
-        // Product ile ProductHolderi binding etmek uchun firebaseRecyclerAdapter istifade edirik
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
-           /* @Override
-            public void updateOptions(@NonNull FirebaseRecyclerOptions<Product> options) {
-                super.updateOptions(options);
+    @Override
+    public void onItemClick(View view, int position) {
+       // this.category_index = position;
+        showData(position);
+
+    }
+    public void showData(int a ){
+
+         switch (a){
+             case 1:
+
+                 categoryQuery =databaseReference
+                         .orderByChild("category")
+                         .equalTo("Sauce" );
+                 Log.i("TAG" , categoryQuery + "Sauce Started working");
+             burger_category_options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(categoryQuery , Product.class).build();
+                 Log.i("TAG" , burger_category_options + "burger_category_options for sauce Started working");
+               //  burger_product.updateOptions(burger_category_options);
+               //  Log.i("TAG" , burger_product + "update options changed");
+
+             case 2:
+                 drinkQuery =databaseReference
+                         .orderByChild("category")
+                         .equalTo("Drinks" );
+                 Log.i("TAG" , categoryQuery + "Drinks Started working");
+                 burger_category_options = new FirebaseRecyclerOptions.Builder<Product>().setQuery(drinkQuery , Product.class).build();
+                 Log.i("TAG" , burger_category_options + "burger_category_options for drink Started working");
+          //     burger_product.updateOptions(burger_category_options);
+            //     Log.i("TAG" , burger_product + "update options changed");
+               //  burger_product.notifyDataSetChanged();
+        /*  drink_category = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(drink_category_options) {
+           @Override
+            public void onDataChanged() {
+                super.onDataChanged();
+                // Called each time there is a new query snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                         }
+
+            @Override
+            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
+                holder.setProductDetails(model.getTitle() , model.getImage());
             }
+            @NonNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_cardview, parent , false);
+                ProductViewHolder productViewHolder = new ProductViewHolder(itemView);
+
+                productViewHolder.setOnClickListener(new ProductViewHolder.ClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        // Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        // Toast.makeText(MainActivity.this, "Long Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return productViewHolder;
+            }
+        };*/
+
+        burger_product = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(burger_category_options) {
+
 
             @Override
             public void onDataChanged() {
                 super.onDataChanged();
                 // Called each time there is a new query snapshot. You may want to use this method
                 // to hide a loading spinner or check for the "no documents" state and update your UI.
-            }*/
+
+            }
 
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Product model) {
@@ -149,8 +218,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
-
-
     }
 
-}
+
+} }

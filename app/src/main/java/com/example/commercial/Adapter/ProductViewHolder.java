@@ -35,7 +35,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     }
      public void setProductDetails( String title , String image) {
          TextView mTitle = mview.findViewById(R.id.burger_name);
-         ImageView mImage = mview.findViewById(R.id.burger_img);
+             ImageView mImage = mview.findViewById(R.id.burger_img);
 
          mTitle.setText(title);
 
